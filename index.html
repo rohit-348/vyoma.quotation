@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Architect Fee Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      width: 350px;
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+    label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    button {
+      background: #007BFF;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    .result {
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Architect Fee Calculator</h2>
+    <form id="calcForm">
+      <label for="area">Built-up Area (sq.ft)</label>
+      <input type="number" id="area" required>
+
+      <label for="type">Project Type</label>
+      <select id="type" required>
+        <option value="residential">Residential</option>
+        <option value="commercial">Commercial</option>
+      </select>
+
+      <label for="complexity">Design Complexity</label>
+      <select id="complexity" required>
+        <option value="basic">Basic</option>
+        <option value="moderate">Moderate</option>
+        <option value="premium">Premium</option>
+      </select>
+
+      <button type="submit">Calculate Fee</button>
+    </form>
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    document.getElementById("calcForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      let area = parseFloat(document.getElementById("area").value);
+      let type = document.getElementById("type").value;
+      let complexity = document.getElementById("complexity").value;
+
+      let rate = 50; // base rate per sq.ft
+      if (type === "commercial") rate += 30;
+      if (complexity === "moderate") rate += 20;
+      if (complexity === "premium") rate += 50;
+
+      let fee = area * rate;
+      document.getElementById("result").innerText = "Estimated Fee: ₹ " + fee.toLocaleString();
+    });
+  </script>
+</body>
+</html>
